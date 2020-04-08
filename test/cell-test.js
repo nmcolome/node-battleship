@@ -89,4 +89,21 @@ describe('Cell', () => {
 
     assert.equal(cell.render(true), "S");
   })
+
+  it('test all renderings', () => {
+    const cell = new Cell('B4');
+    const cruiser = new Ship("Cruiser", 3);
+    cell.placeShip(cruiser);
+
+    assert.equal(cell.render(), ".");
+    assert.equal(cell.render(true), "S");
+
+    cell.fireUpon();
+    assert.equal(cell.render(), "H");
+
+    cell.fireUpon();
+    cell.fireUpon();
+    assert.equal(cell.ship.isSunk, true);
+    assert.equal(cell.render(), "X");
+  })
 })
