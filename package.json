@@ -1,0 +1,16 @@
+{
+  "name": "node-battleship",
+  "version": "1.0.0",
+  "description": "Battleship REPL game",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Natalia Colome",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1"
+  }
+}
