@@ -41,7 +41,7 @@ describe('Cell', () => {
     cell.placeShip(cruiser);
     assert.equal(cell.wasFiredUpon, false);
 
-    cell.fireUpon;
+    cell.fireUpon();
     assert.equal(cell.ship.health, 2);
     assert.equal(cell.wasFiredUpon, true);
   })
