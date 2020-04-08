@@ -30,7 +30,7 @@ describe('Cell', () => {
     const cruiser = new Ship("Cruiser", 3);
 
     cell.placeShip(cruiser);
-    assert.equal(cell.empty, false);
-    assert.equal(cell.ship, ship);
+    assert.equal(cell.isEmpty, false);
+    assert.equal(cell.ship, cruiser);
   })
 })
