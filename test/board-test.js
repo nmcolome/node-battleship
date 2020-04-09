@@ -124,4 +124,17 @@ describe('Board', () => {
     })
   })
 
+  it('places ships in its cells', () => {
+    const board = new Board();
+    const cruiser = new Ship('Cruiser', 3);
+    // const submarine = new Ship('Submarine', 2);
+
+    board.place(cruiser, ['A1', 'A2', 'A3'])
+
+    assert.equal(board.cells['A1'].ship, cruiser)
+    assert.equal(board.cells['A2'].ship, cruiser)
+    assert.equal(board.cells['A3'].ship, cruiser)
+    assert.equal(board.cells['A1'].ship, board.cells['A3'].ship)
+  })
+
 })
