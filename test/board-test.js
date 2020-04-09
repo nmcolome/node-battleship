@@ -152,7 +152,7 @@ describe('Board', () => {
     assert.equal(board.render(), result)
   })
 
-  it.skip('renders the board, showing the ships, if showShip is true', () => {
+  it('renders the board, showing the ships, if showShip is true', () => {
     const board = new Board();
     const cruiser = new Ship('Cruiser', 3);
 
