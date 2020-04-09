@@ -27,6 +27,19 @@ describe('Board', () => {
     assert.equal(board.isValidCoordinate('A22'), false)
   })
 
+  it('places ships in its cells', () => {
+    const board = new Board();
+    const cruiser = new Ship('Cruiser', 3);
+    // const submarine = new Ship('Submarine', 2);
+
+    board.place(cruiser, ['A1', 'A2', 'A3'])
+
+    assert.equal(board.cells['A1'].ship, cruiser)
+    assert.equal(board.cells['A2'].ship, cruiser)
+    assert.equal(board.cells['A3'].ship, cruiser)
+    assert.equal(board.cells['A1'].ship, board.cells['A3'].ship)
+  })
+
   describe('validates the placement of a ship', () => {
     it('gets column keys out of coordinates', () => {
       const board = new Board();
@@ -94,7 +107,7 @@ describe('Board', () => {
       const submarine = new Ship('Submarine', 2);
 
       assert.equal(board.noOverlap(['A1', 'A2']), true)
-      board.cells['A1'].placeShip(cruiser);
+      board.place(cruiser, ['A1', 'A2', 'A3']);
 
       assert.equal(board.noOverlap(['A1', 'B1', 'C1']), false)
     })
@@ -124,17 +137,33 @@ describe('Board', () => {
     })
   })
 
-  it('places ships in its cells', () => {
+  it('renders the board, hiding the ships by default', () => {
     const board = new Board();
     const cruiser = new Ship('Cruiser', 3);
-    // const submarine = new Ship('Submarine', 2);
 
     board.place(cruiser, ['A1', 'A2', 'A3'])
 
-    assert.equal(board.cells['A1'].ship, cruiser)
-    assert.equal(board.cells['A2'].ship, cruiser)
-    assert.equal(board.cells['A3'].ship, cruiser)
-    assert.equal(board.cells['A1'].ship, board.cells['A3'].ship)
+    const result =  '  1 2 3 4 \n' +
+                    'A . . . . \n' +
+                    'B . . . . \n' +
+                    'C . . . . \n' +
+                    'D . . . . \n'
+
+    assert.equal(board.render(), result)
   })
 
+  it.skip('renders the board, showing the ships, if showShip is true', () => {
+    const board = new Board();
+    const cruiser = new Ship('Cruiser', 3);
+
+    board.place(cruiser, ['A1', 'A2', 'A3'])
+
+    const result =  '  1 2 3 4 \n' +
+                    'A S S S . \n' +
+                    'B . . . . \n' +
+                    'C . . . . \n' +
+                    'D . . . . \n'
+
+    assert.equal(board.render(true), result)
+  })
 })
