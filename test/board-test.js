@@ -88,25 +88,36 @@ describe('Board', () => {
       assert.equal(board.isDiagonal(['C2', 'D3']), false)
     })
 
+    it('validates ships are not overlapping', () => {
+      const board = new Board();
+      const cruiser = new Ship('Cruiser', 3);
+      const submarine = new Ship('Submarine', 2);
+
+      assert.equal(board.noOverlap(['A1', 'A2']), true)
+      board.cells['A1'].placeShip(cruiser);
+
+      assert.equal(board.noOverlap(['A1', 'B1', 'C1']), false)
+    })
+
     it('validates all conditions to place a ship', () => {
       const board = new Board();
       const cruiser = new Ship('Cruiser', 3);
       const submarine = new Ship('Submarine', 2);
-  
+
       //the number of coordinates in the array should be the same as the length of the ship
       assert.equal(board.isValidPlacement(cruiser, ['A1', 'A2']), false)
       assert.equal(board.isValidPlacement(submarine, ['A2', 'A3', 'A4']), false)
-  
+
       //the coordinates are consecutive:
       assert.equal(board.isValidPlacement(cruiser, ['A1', 'A2', 'A4']), false)
       assert.equal(board.isValidPlacement(submarine, ['A1', 'C1']), false)
       assert.equal(board.isValidPlacement(cruiser, ['A3', 'A2', 'A1']), false)
       assert.equal(board.isValidPlacement(submarine, ['C1', 'B1']), false)
-  
+
       //coordinates can’t be diagonal:
       assert.equal(board.isValidPlacement(cruiser, ['A1', 'B2', 'C3']), false)
       assert.equal(board.isValidPlacement(submarine, ['C2', 'D3']), false)
-  
+
       //every case must pass
       assert.equal(board.isValidPlacement(submarine, ['A1', 'A2']), true)
       assert.equal(board.isValidPlacement(cruiser, ['B1', 'C1', 'D1']), true)
